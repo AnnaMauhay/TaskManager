@@ -1,9 +1,12 @@
 package futurewomen;
+
+import java.util.ArrayList;
+
 /*
 This class will represent a task with attributes like title, description, priority, and status.
 Tasks will implement an interface called Taskable to define methods for task management.
  */
-public class Task implements Taskable{
+public class Task {
     private String title;
 
     public String getTitle() {
@@ -14,12 +17,12 @@ public class Task implements Taskable{
         this.title = title;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Priority getPriority() {
@@ -38,7 +41,7 @@ public class Task implements Taskable{
         this.status = status;
     }
 
-    private String desciption;
+    private String description;
     private Priority priority;
     private Status status;
 
@@ -53,17 +56,23 @@ public class Task implements Taskable{
         COMPLETED
     }
 
-    public Task(String title, String desciption, Priority priority, Status status) {
+    public Task(String title, String description, Priority priority, Status status) {
         this.title = title;
-        this.desciption = desciption;
+        this.description = description;
         this.priority = priority;
         this.status = status;
+    }
+    public Task(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.priority = Priority.LOW;
+        this.status = Status.TO_DO;
     }
 
     @Override
     public String toString() {
         return "Title: " + this.title
-                + "\nDescription: " + this.desciption
+                + "\nDescription: " + this.description
                 + "\nPriority: " + this.priority
                 + "\nStatus: " + this.status;
     }
