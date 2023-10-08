@@ -53,6 +53,7 @@ public class UserInterface {
                     String description = "";
                     description = in.nextLine();
                     taskList.add(new Task(title, description));
+                    System.out.println(taskList.getTask(taskList.getCount()-1).toString());
                     input.nextLine();
                     break;
                 case 2:
