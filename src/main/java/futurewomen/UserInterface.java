@@ -10,10 +10,22 @@ public class UserInterface {
     private static TaskList taskList;
 
     public static void run() {
-        StringBuilder header = new StringBuilder("============================");
-        header.append("\n=    Hello and welcome!    =");
-        header.append("\n= I am your Micro Manager! =");
-        header.append("\n============================\n");
+        StringBuilder header = new StringBuilder("""
+        ============================
+        =    Hello and welcome!    =
+        = I am your Micro Manager! =
+        ============================
+        """);
+        StringBuilder homeMenu = new StringBuilder("""
+                    What would you like to do?
+                        1. Create a task.
+                        2. View task.
+                        3. Change task title.
+                        4. Change task description.
+                        5. Change task priority.
+                        6. Change task status.
+                        7. Delete task.
+                        9. Exit.""");
 
         Task task = new Task("Create Initial Structure",
                 "Create all classes and methods as per specifications.",
@@ -26,25 +38,20 @@ public class UserInterface {
         String answer = "";
         while (choice != 9) {
             System.out.print("\033[H\033[2J");
-            System.out.flush();
+            System.out.flush();         //clears the screen
             System.out.println(header);
-            System.out.println("\nWhat would you like to do?"
-                    + "\n1. Create a task."
-                    + "\n2. View task."
-                    + "\n3. Change task title."
-                    + "\n4. Change task description."
-                    + "\n5. Change task priority."
-                    + "\n6. Change task status."
-                    + "\n7. Delete task."
-                    + "\n9. Exit.");
+            System.out.println(homeMenu);
             choice = input.nextInt();
             input.nextLine();
             switch (choice) {
                 case 1:
-                    System.out.println("You want to create a task!");
-                    //TODO
+                    System.out.println("You want to create a new task. Please provide a title");
+                    Scanner in = new Scanner(System.in);
                     String title = "";
+                    title = in.nextLine();
+                    System.out.println("Provide the description.");
                     String description = "";
+                    description = in.nextLine();
                     taskList.add(new Task(title, description));
                     input.nextLine();
                     break;
