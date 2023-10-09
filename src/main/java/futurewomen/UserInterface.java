@@ -1,6 +1,7 @@
 package futurewomen;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -41,125 +42,137 @@ public class UserInterface {
             System.out.flush();         //clears the screen
             System.out.println(header);
             System.out.println(homeMenu);
-            choice = input.nextInt();
-            input.nextLine();
-            switch (choice) {
-                case 1:
-                    System.out.println("You want to create a new task. Please provide a title");
-                    Scanner in = new Scanner(System.in);
-                    String title = "";
-                    title = in.nextLine();
-                    System.out.println("Provide the description.");
-                    String description = "";
-                    description = in.nextLine();
-                    taskList.add(new Task(title, description));
-                    System.out.println(taskList.getTask(taskList.getCount()-1).toString());
-                    input.nextLine();
-                    break;
-                case 2:
-                    if (displayTaskList().isEmpty()) {
-                        System.out.println("--- Empty Task List ---");
-                    } else {
-                        System.out.println("Which of the tasks would you like to view?");
-                        System.out.println(displayTaskList());
-
-                        choice = input.nextInt();
+            try {
+                choice = input.nextInt();
+                input.nextLine();
+                switch (choice) {
+                    case 1:
+                        System.out.println("You want to create a new task. Please provide a title");
+                        Scanner in = new Scanner(System.in);
+                        String title = "";
+                        title = in.nextLine();
+                        System.out.println("Provide the description.");
+                        String description = "";
+                        description = in.nextLine();
+                        taskList.add(new Task(title, description));
+                        System.out.println(taskList.getTask(taskList.getCount() - 1).toString());
                         input.nextLine();
-                        if (isValid(choice)) {
-                            System.out.println(taskList.getTask(choice).toString());
-                        } else System.out.println("Your input returned no result.");
-                    }
-                    input.nextLine();
-                    break;
-
-                case 3: //Change task title
-                    if (displayTaskList().isEmpty()) {
-                        System.out.println("--- Empty Task List ---");
-                    } else {
-                        System.out.println("Which of the tasks would you like to update?");
-                        System.out.println(displayTaskList());
-
-                        choice = input.nextInt();
-                        input.nextLine();
-                        if (isValid(choice)) {
-                            System.out.println("Please write the new title.");
-                            answer = input.nextLine();
-                            taskList.changeTitle(choice, answer);
-                            System.out.println(taskList.getTask(choice).toString());
-                        } else System.out.println("Your input returned no result.");
-                    }
-                    input.nextLine();
-                    break;
-
-                case 4: //Change task description.
-                    if (displayTaskList().isEmpty()) {
-                        System.out.println("--- Empty Task List ---");
-                    } else {
-                        System.out.println("Which of the tasks would you like to update?");
-                        System.out.println(displayTaskList());
-
-                        choice = input.nextInt();
-                        input.nextLine();
-                        if (isValid(choice)) {
-                            System.out.println("Please write the new description.");
-                            answer = input.nextLine();
-                            taskList.changeDescription(choice, answer);
-                            System.out.println(taskList.getTask(choice).toString());
-                        } else System.out.println("Your input returned no result.");
-                    }
-                    input.nextLine();
-                    break;
-
-                case 5: //Change task priority.
-                    if (displayTaskList().isEmpty()) {
-                        System.out.println("--- Empty Task List ---");
-                    } else {
-                        System.out.println("Which of the tasks would you like to update?");
-                        System.out.println(displayTaskList());
-
-                        choice = input.nextInt();
-                        input.nextLine();
-                        if (isValid(choice)) {
-                            changePriority(choice);
-                        } else System.out.println("Your input returned no result.");
-                    }
-                    input.nextLine();
-                    break;
-
-                case 6: //Change task status..
-                    if (displayTaskList().isEmpty()) {
-                        System.out.println("--- Empty Task List ---");
-                    } else {
-                        System.out.println("Which of the tasks would you like to update?");
-                        System.out.println(displayTaskList());
-
-                        choice = input.nextInt();
-                        input.nextLine();
-                        if (isValid(choice)) {
-                            changeStatus(choice);
-                        } else System.out.println("Your input returned no result.");
-                    }
-                    input.nextLine();
-                    break;
-
-                case 7: //Delete task.
-                    if (displayTaskList().isEmpty()) {
-                        System.out.println("--- Empty Task List ---");
-                    } else {
-                        System.out.println("Which of the tasks would you like to delete?");
-                        System.out.println(displayTaskList());
-
-                        choice = input.nextInt();
-                        input.nextLine();
-                        if (isValid(choice)) {
-                            taskList.delete(choice);
-                            System.out.println("Deletion successful.");
+                        break;
+                    case 2:
+                        if (displayTaskList().isEmpty()) {
+                            System.out.println("--- Empty Task List ---");
                         } else {
-                            System.out.println("Your input returned no result.");
+                            System.out.println("Which of the tasks would you like to view?");
+                            System.out.println(displayTaskList());
+
+                            choice = input.nextInt();
+                            input.nextLine();
+                            if (isValid(choice)) {
+                                System.out.println(taskList.getTask(choice).toString());
+                            } else System.out.println("Your input returned no result.");
                         }
-                    }
-                    input.nextLine();
-                    break;
+                        input.nextLine();
+                        break;
+
+                    case 3: //Change task title
+                        if (displayTaskList().isEmpty()) {
+                            System.out.println("--- Empty Task List ---");
+                        } else {
+                            System.out.println("Which of the tasks would you like to update?");
+                            System.out.println(displayTaskList());
+
+                            choice = input.nextInt();
+                            input.nextLine();
+                            if (isValid(choice)) {
+                                System.out.println("Please write the new title.");
+                                answer = input.nextLine();
+                                taskList.changeTitle(choice, answer);
+                                System.out.println(taskList.getTask(choice).toString());
+                            } else System.out.println("Your input returned no result.");
+                        }
+                        input.nextLine();
+                        break;
+
+                    case 4: //Change task description.
+                        if (displayTaskList().isEmpty()) {
+                            System.out.println("--- Empty Task List ---");
+                        } else {
+                            System.out.println("Which of the tasks would you like to update?");
+                            System.out.println(displayTaskList());
+
+                            choice = input.nextInt();
+                            input.nextLine();
+                            if (isValid(choice)) {
+                                System.out.println("Please write the new description.");
+                                answer = input.nextLine();
+                                taskList.changeDescription(choice, answer);
+                                System.out.println(taskList.getTask(choice).toString());
+                            } else System.out.println("Your input returned no result.");
+                        }
+                        input.nextLine();
+                        break;
+
+                    case 5: //Change task priority.
+                        if (displayTaskList().isEmpty()) {
+                            System.out.println("--- Empty Task List ---");
+                        } else {
+                            System.out.println("Which of the tasks would you like to update?");
+                            System.out.println(displayTaskList());
+
+                            choice = input.nextInt();
+                            input.nextLine();
+                            if (isValid(choice)) {
+                                changePriority(choice);
+                            } else System.out.println("Your input returned no result.");
+                        }
+                        input.nextLine();
+                        break;
+
+                    case 6: //Change task status..
+                        if (displayTaskList().isEmpty()) {
+                            System.out.println("--- Empty Task List ---");
+                        } else {
+                            System.out.println("Which of the tasks would you like to update?");
+                            System.out.println(displayTaskList());
+
+                            choice = input.nextInt();
+                            input.nextLine();
+                            if (isValid(choice)) {
+                                changeStatus(choice);
+                            } else System.out.println("Your input returned no result.");
+                        }
+                        input.nextLine();
+                        break;
+
+                    case 7: //Delete task.
+                        if (displayTaskList().isEmpty()) {
+                            System.out.println("--- Empty Task List ---");
+                        } else {
+                            System.out.println("Which of the tasks would you like to delete?");
+                            System.out.println(displayTaskList());
+
+                            choice = input.nextInt();
+                            input.nextLine();
+                            if (isValid(choice)) {
+                                taskList.delete(choice);
+                                System.out.println("Deletion successful.");
+                            } else {
+                                System.out.println("Your input returned no result.");
+                            }
+                        }
+                        input.nextLine();
+                        break;
+                    case 9:
+                        System.out.println("Goodbye!");
+                        break;
+                    default:
+                        System.out.println("Please provide a number from the above choices");
+                        input.nextLine();
+                }
+            }catch (InputMismatchException exception){
+                System.out.println("Please enter an integer value");
+                input.nextLine();
+                input.nextLine();
             }
         }
 
