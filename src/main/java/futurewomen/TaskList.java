@@ -7,11 +7,11 @@ This class will manage the task list, including adding, viewing, updating, and d
  */
 public class TaskList implements Taskable {
     private ArrayList<Task> taskList;
-
+    //TODO: Save taskList in a file.
     public void add(Task task) {
-        this.taskList.add(task);
+        if (task!=null) this.taskList.add(task);
     }
-    public Task getTask(int index) {
+    public Task getTask(int index) {    //TODO: consider throws NPE, and handle potential ArrayIndexOutOfBounds error.
         return taskList.get(index);
     }
     public ArrayList<Task> getTaskList(){
